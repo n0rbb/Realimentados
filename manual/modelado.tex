@@ -1,9 +1,9 @@
 \chapter{Modelado de sistemas dinámicos}\label{modelado}
 
 \section{Sistemas en el espacio de estados}
-Nos vamos a centrar en sistemas que puedan ser descritos por características cuantificables. A estas características las vamos a llamar {\bf variables de estado}, como por ejemplo, una temperatura, una velocidad, o un voltaje. Si estas variables de estado dependen del tiempo, entonces, llamamos {\bf señal} a la sucesión de valores de las variables de estado en el tiempo. Uno podría interaccionar con el sistema a través de una {\bf entrada} cuantificable, y a su vez medir información del sistema a través de una {\bf salida} cuantificable.
+Nos vamos a centrar en sistemas que puedan ser descritos por características cuantificables. A estas características las vamos a llamar {\bf variables de estado}, como por ejemplo, una temperatura, una velocidad, o un voltaje. Si estas variables de estado dependen del tiempo, llamamos {\bf señal} a la sucesión de valores de las variables de estado en el tiempo. Uno podría interaccionar con el sistema a través de una {\bf entrada} cuantificable, y a su vez medir información del sistema a través de una {\bf salida} cuantificable.\\
 
-Vamos a definir $x(t)\in\mathbb{R}^n$, $y(t)\in\mathbb{R}^m$ y $u(t)\in\mathbb{R}^k$ respectivamente, como el vector apilado de variables estados, la salida, y la entrada a un sistema $\Sigma$. En particular, variables de estado, entradas y salidas son señales, e.g., $x :[0,\infty) \to \mathbb{R}^n$.
+Vamos a definir $x(t)\in\mathbb{R}^n$, $y(t)\in\mathbb{R}^m$ y $u(t)\in\mathbb{R}^k$, respectivamente, como el vector apilado de variables estados, la salida y la entrada a un sistema $\Sigma$. En particular, variables de estado, entradas y salidas son señales, e.g. $x :[0,\infty) \to \mathbb{R}^n$.\\
 
 El sistema $\Sigma$ es un modelo que predice el valor de las variables de estado y la salida a lo largo del tiempo. Esta predicción incorpora la interacción de la entrada con los estados y la salida. En particular, vamos a emplear ecuaciones diferenciales como herramienta para predecir la evolución en el tiempo de los estados del sistema $\Sigma$ como se muestra a continuación
 \begin{equation}
@@ -12,9 +12,9 @@ El sistema $\Sigma$ es un modelo que predice el valor de las variables de estado
 	\end{cases}, 
 \label{eq: sigma}
 \end{equation}
-en donde $\dot x := \frac{\mathrm{d}}{\mathrm{dt}}(x(t))$ es la notación para la derivada total con respecto del tiempo, y $f:\mathbb{R} \times \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^n$ y $g: \mathbb{R} \times \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^m$ son funciones.
+en donde $\dot x := \frac{\mathrm{d}}{\mathrm{dt}}(x(t))$ es la notación para la derivada total con respecto del tiempo, y $f:\mathbb{R} \times \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^n$ y $g: \mathbb{R} \times \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^m$ son funciones.\\
 
-Podemos representar el sistema $\Sigma$ como un bloque con puertos de entrada y de salida como se muestra en la figura \ref{fig: sigma}.
+Podemos representar el sistema $\Sigma$ como un bloque con puertos de entrada y de salida como se muestra en la figura \ref{fig: sigma}.\\
 
 \begin{figure}[!ht]
 \centering
@@ -29,27 +29,29 @@ Podemos representar el sistema $\Sigma$ como un bloque con puertos de entrada y 
 	\label{fig: sigma}
 \end{figure}
 
-Dado que el sistema viene descrito por las variables de estado,  con frecuencia es posible prescindir de la salida y centrar el estudio en la primera de las dos ecuaciones anteriores.
+Dado que el sistema viene descrito por las variables de estado,  con frecuencia es posible prescindir de la salida y centrar el estudio en la primera de las dos ecuaciones anteriores.\\
 
- En ocasiones podemos emplear para describir un sistema ecuaciones de estado en las que no aparece explícitamente la entrada,
+ En ocasiones podemos emplear ecuaciones de estado en las que no aparece explícitamente la entrada  para describir un sistema,
 \begin{equation}
-\dot x = f(t,x)
-\end{equation}\label{eq: for}
-En este caso, se habla de una ecuación de estado no forzada. Esto no quiere decir necesariamente que la entrada al sistema sea cero. Puede aparecer representada directamente como una función del tiempo, $u=\rho(t)$,  como una función (\emph{realimentación}) de los estados $u = \rho(x)$ o como una función de ambos $u=\rho(t,x)$.
+\dot x = f(t,x).
+\end{equation}\label{eq: for}\\
+
+En este caso se habla de una ecuación de estado no forzada. Esto no quiere decir necesariamente que la entrada al sistema sea cero. Puede aparecer representada directamente como una función del tiempo, $u=\rho(t)$,  como una función (\emph{realimentación}) de los estados $u = \rho(x)$ o como una función de ambos $u=\rho(t,x)$.\\
+
 Un caso especialmente interesante de (\ref{eq: for}) se obtiene cuando $f$ no depende explícitamente del tiempo,
 \begin{equation}
-\dot x = f(x)
+\dot x = f(x).
 \end{equation}
-Se trata entonces de un sistema \emph{autónomo} o \emph{invariante en el tiempo}. Es decir, el comportamiento del sistema es invariante bajo traslaciones del origen de tiempos; si cambiamos la variable tiempo de $t$ a $t-a$, la parte derecha de la ecuación de estado no experimenta cambio.
+Se trata entonces de un sistema \emph{autónomo} o \emph{invariante en el tiempo}. Es decir, el comportamiento del sistema es invariante bajo traslaciones del origen de tiempos; si cambiamos la variable tiempo de $t$ a $t-a$, la parte derecha de la ecuación de estado no experimenta cambios.\\
 
-Para un sistema dinámico, descrito mediante variable de estados, un punto de equilibrio $\overline x$  tiene la propiedad de que si el sistema se encuentra en $\overline x$ en un instante de tiempo $t_0$, permanecerá en ese  mismo punto para todo instante de tiempo posterior $t>t_0$. En el caso de un sistema autónomo, los puntos de equilibrio son las raíces reales de la ecuación,
+Para un sistema dinámico descrito mediante variable de estados, un punto de equilibrio $\overline x$  tiene la propiedad de que si el sistema se encuentra en $\overline x$ en un instante de tiempo $t_0$, permanecerá en ese mismo punto para todo instante de tiempo posterior $t>t_0$. En el caso de un sistema autónomo, los puntos de equilibrio son las raíces reales de la ecuación
 \begin{equation}
-f(x)=0
-\end{equation} 
+f(x)=0.
+\end{equation} \\
 
-Los puntos de equilibrio juegan un papel muy importante en el estudio de los sistemas dinámicos, como tendremos ocasión de ver más adelante.
+Los puntos de equilibrio juegan un papel muy importante en el estudio de los sistemas dinámicos, como tendremos ocasión de ver más adelante.\\
 
-Un caso particular de sistema dinámicos los constituyen los sistemas lineales. Para ellos la ecuación \ref{eq: sigma} toma la forma,
+Un caso particular de sistemas dinámicos los constituyen los sistemas lineales. Para ellos la ecuación \ref{eq: sigma} toma la forma
 \begin{equation}
 	\Sigma := \begin{cases}
 		\dot x(t) =& A(t)x(t)+B(t)u(t) \\ y(t) =& C(t)x(t)+D(t)u(t)
@@ -57,43 +59,41 @@ Un caso particular de sistema dinámicos los constituyen los sistemas lineales. 
 \label{eq: sigmaL}
 \end{equation}
 
-En el capítulo 5 se estudiarán en detalle los sistemas lineales, cuyas propiedades permiten emplear herramientas de análisis precisas y potentes para su estudio y caracterización. En el caso del resto de los sistemas, es decir todos aquellos que son no-lineales, el análisis resulta más complejo.
+En el capítulo 5 se estudiarán en detalle los sistemas lineales, cuyas propiedades permiten emplear herramientas de análisis precisas y potentes para su estudio y caracterización. En el caso del resto de los sistemas, es decir todos aquellos que son no-lineales, el análisis resulta más complejo.\\
 
-Una primera aproximación al estudio de los sistemas no-lineales es linealizarlos en torno a un punto de trabajo y estudiar el sistema lineal resultante. Esta aproximación es muy valiosa, como  veremos en la sección (\ref{sec: linear}), sin embargo, solo es válida en las proximidades del punto de trabajo. Por tanto no es posible predecir a partir de ella el comportamiento del sistema cuando nos alejamos de dicho punto. Por otro lado, los sistemas no-lineales presentan una dinámica mucho mas rica, con fenómenos que no se dan en los sistemas lineales y que no pueden describirse con un modelo linealizado del sistema no-lineal. Algunos de éstos fenómenos son:
+Una primera aproximación al estudio de los sistemas no-lineales es linealizarlos en torno a un punto de trabajo y estudiar el sistema lineal resultante. Esta aproximación es muy valiosa, como veremos en la sección (\ref{sec: linear}). Sin embargo, solo es válida en las proximidades del punto de trabajo. Por tanto no es posible predecir a partir de ella el comportamiento del sistema cuando nos alejamos de dicho punto. Por otro lado, los sistemas no-lineales presentan una dinámica mucho mas rica, con fenómenos que no se dan en los sistemas lineales y que no pueden describirse con un modelo linealizado del sistema no-lineal. Algunos de éstos fenómenos son:
 
 \paragraph{Múltiples puntos de equilibrio aislados.} Para un sistema lineal solo es posible encontrar un punto de equilibrio o una región continua de ellos (rectas, planos, etc).  Un sistema lineal es asintóticamente estable cuando, partiendo de valores iniciales arbitrarios, sus variables de estado se aproximan al punto de equilibrio con el tiempo. 
 
 \begin{equation}
 \lim_{ t \to \infty} x \to \overline x
 \end{equation}
-
-
 Un sistema no lineal puede presentar más de un punto de equilibrio y aproximarse a uno u otro dependiendo de las condiciones iniciales.
 
 \paragraph{Tiempo de escape finito (\emph{Finite escape time}).} Un sistema lineal es inestable cuando, partiendo de valores arbitrarios, sus variables de estado divergen --se van a infinito-- con el tiempo.
 \begin{equation}
 \lim_{ t \to \infty} x \to \infty
 \end{equation}
-Es posible encontrar sistemas no-lineales inestables que se comportan de modo análogo a los lineales pero además, algunos sistemas no lineales divergen, se van a infinito, en un tiempo finito. 
+Es posible encontrar sistemas no-lineales inestables que se comportan de modo análogo a los lineales pero además, algunos sistemas no-lineales divergen --se van a infinito-- en un tiempo finito. 
 \begin{equation}
 \lim_{ t \to t_e} x \to \infty
 \end{equation}
 
-\paragraph{ciclos límite.} Un sistema lineal se dice que es marginalmente estable, cuando sus variables de estado oscilan periódicamente. Sin embargo, como veremos más adelante, las circunstancias para que se de una oscilación mantenida en un sistema lineal, constituyen una condición no robusta, por lo que es en la práctica  imposible que se dé en condiciones reales. Además, la amplitud de las oscilaciones depende de las condiciones iniciales del sistema.
+\paragraph{Ciclos límite.} Se dice que un sistema lineal es marginalmente estable cuando sus variables de estado oscilan periódicamente. Sin embargo, como veremos más adelante, las circunstancias para que se dé una oscilación mantenida en un sistema lineal constituyen una condición no robusta, por lo que en la práctica es imposible que se dé en condiciones reales. Además, la amplitud de las oscilaciones depende de las condiciones iniciales del sistema.\\
 
-Hay sistemas no lineales que pueden oscilar de modo estable con una amplitud y frecuencia independiente de las condiciones iniciales. A este tipo de oscilaciones se les conoce con el nombre de ciclos límite. 
+Hay sistemas no-lineales que pueden oscilar de modo estable con una amplitud y frecuencia independiente de las condiciones iniciales. Este tipo de oscilaciones son conocidas con el nombre de ciclos límite. 
 
-\paragraph{Caos.} Algunos sistemas no-lineales exhiben comportamientos aún más complicados. No alcanzan un punto de equilibrio, no presentan oscilaciones periódicas, ni tampoco son inestable. A este comportamiento se le denomina caótico. Alguno sistemas presentan incluso un comportamiento aleatorio, a pesar de la naturaleza determinista de las ecuaciones diferenciales que lo definen.
+\paragraph{Caos.} Algunos sistemas no-lineales exhiben comportamientos aún más complicados. No alcanzan un punto de equilibrio, no presentan oscilaciones periódicas y tampoco son inestables. A este comportamiento se le denomina \emph{caótico}. Algunos sistemas presentan incluso un comportamiento aleatorio, a pesar de la naturaleza determinista de las ecuaciones diferenciales que lo definen.\\
 
 
- Resulta por tanto necesario, buscar herramientas específicas para el análisis de los sistemas no-lineales.
+ Resulta por tanto necesario buscar herramientas específicas para el análisis de los sistemas no-lineales.
 \section{Ejemplos de sistemas dinámicos}\label{sec: ejem}
 A continuación se presentan algunos ejemplos clásicos de sistemas dinámicos.
 \begin{example}[Péndulo invertido]
 
-Vamos a derivar las funciones $f$ y $g$ en (\ref{eq: sigma}) para el sistema del péndulo invertido.
+Vamos a derivar las funciones $f$ y $g$ en (\ref{eq: sigma}) para el sistema del péndulo invertido.\\
 
-Primero, vamos a hallar la ecuación diferencial que describe la dinámica de una masa $m\in\mathbb{R}_+$ en el extremo de un péndulo de longitud $l\in\mathbb{R}_+$ tal y como se muestra en la figura \ref{fig: invpen}. Vamos a considerar que podemos interactuar con el sistema por medio de un torque $T\in\mathbb{R}$ en el otro extremo del péndulo, que la masa sufre un rozamiento proporcional $b\in\mathbb{R}_+$ a su celeridad, y que podemos medir el ángulo $\theta\in\mathbb{R}$ que forma el péndulo con la vertical.
+Primero, vamos a hallar la ecuación diferencial que describe la dinámica de una masa $m\in\mathbb{R}_+$ en el extremo de un péndulo de longitud $l\in\mathbb{R}_+$ tal y como se muestra en la figura \ref{fig: invpen}. Vamos a considerar que podemos interactuar con el sistema por medio de un torque $T\in\mathbb{R}$ en el otro extremo del péndulo, que la masa sufre un rozamiento proporcional $b\in\mathbb{R}_+$ a su celeridad y que podemos medir el ángulo $\theta\in\mathbb{R}$ que forma el péndulo con la vertical.
 
 \begin{figure}[!ht]
 \centering
@@ -113,7 +113,7 @@ Primero, vamos a hallar la ecuación diferencial que describe la dinámica de un
     \draw[thick] (origo) -- ++(-300:3) coordinate (bob) ++(0.5,0) node (hola) [black] {$m$};
     \fill (bob) circle (0.2);
     \draw[->] (bob) -- ++(0,-1) node (mg) [right] {$mg$};
-    \draw[->] (bob) -- ++(-0.5,0.5) node (fr) [above] {$b\dot\theta$};
+    \draw[->] (bob) -- ++(-0.5,0.35) node (fr) [above] {$b\dot\theta$};
 
     \pic [draw, <-, "$\theta$", angle eccentricity=1.5] {angle = bob--origo--mary};
 \end{tikzpicture}
@@ -121,7 +121,7 @@ Primero, vamos a hallar la ecuación diferencial que describe la dinámica de un
 \label{fig: invpen}
 \end{figure}
 
-Define $g = 9.8$ e $I\in\mathbb{R}_+$ como la aceleración gravitatoria y el momento de inercia del péndulo respectivamente. Es sencillo comprobar que $I = ml^2$, y explotaremos que $I \ddot\theta = \text{suma de torques}$. De hecho, tenemos que considerar tres torques: 1. Torque $T$ ejercido por nosotros en la base del péndulo; 2. Torque $-bl\dot\theta$ ejercido por la fricción en la masa; 3. Torque $mgl \sin\theta$ ejercido por la atracción gravitatoria. Por lo que la ecuación diferencial que modela el comportamiento del péndulo invertido es
+Definimos $g = 9.8$ e $I\in\mathbb{R}_+$ como la aceleración gravitatoria y el momento de inercia del péndulo respectivamente. Es sencillo comprobar que $I = ml^2$, y explotaremos que $I \ddot\theta = \text{suma de torques}$. De hecho, tenemos que considerar tres torques: 1. Torque $T$ ejercido por nosotros en la base del péndulo; 2. Torque $-bl\dot\theta$ ejercido por la fricción en la masa; 3. Torque $mgl \sin\theta$ ejercido por la atracción gravitatoria. Por lo que la ecuación diferencial que modela el comportamiento del péndulo invertido es
 \begin{equation}
 \ddot\theta = \frac{1}{ml^2}\left(mgl\sin{\theta}-bl\dot\theta + T\right).
 \label{eq: dyn}
@@ -131,19 +131,19 @@ Parece razonable escoger $\theta$ como uno de los estados para construir $x(t)$ 
 \begin{equation}
 x := \begin{bmatrix}\theta \\ \dot\theta \end{bmatrix},
 \end{equation}
-y dado que mediante el torque $T$ es como interactuamos con el sistema, escogemos como entrada $u(t) = T(t)$.
+y dado que mediante el torque $T$ es como interactuamos con el sistema, escogemos como entrada $u(t) = T(t)$.\\
 
-Ahora estamos listos para construir las funciones $f$ and $g$ en (\ref{eq: sigma}) para el péndulo invertido. Atención a que $f$ y $g$ solo toma como argumentos los vectores de estados $x$ y de entradas $u$. En el lado izquierdo de (\ref{eq: sigma}) tenemos la derivada temporal de $x(t)$, por lo que
+Ahora estamos listos para construir las funciones $f$ y $g$ en (\ref{eq: sigma}) para el péndulo invertido. Atención a que $f$ y $g$ solo toman como argumentos los vectores de estados $x$ y de entradas $u$. En el lado izquierdo de (\ref{eq: sigma}) tenemos la derivada temporal de $x(t)$, por lo que
 
 \begin{equation}
 	\frac{\mathrm{d}}{\mathrm{dt}}\left(\begin{bmatrix}\theta \\ \dot\theta \end{bmatrix}\right) = f(x(t), u(t)) = \begin{bmatrix}f_1(x(t), u(t)) \\ f_2(x(t), u(t))\end{bmatrix}, \label{eq: fn}
 \end{equation}
-donde automáticamente obtenemos que $f_1 = \dot\theta$. Fijarse que la primera fila de $f$ en (\ref{eq: fn}), a la izquierda tenemos que $\frac{\mathrm{d}}{\mathrm{dt}}\theta$, y a la derecha tenemos que $f_1 = \dot\theta$ porque $\dot\theta$ es un estado o elemento de $x$. Desafortunadamente, no podemos decir que $f_2 = \ddot\theta(t)$ porque $ \ddot\theta$ no es un estado o elemento de $x$. No obstante, tenemos que la segunda fila $f_2$ viene dada por la ecuación (\ref{eq: dyn}). Por lo que podemos escribir $f$ como
+donde automáticamente obtenemos que $f_1 = \dot\theta$. Nótese que la primera fila de $f$ en (\ref{eq: fn}), a la izquierda tenemos que $\frac{\mathrm{d}}{\mathrm{dt}}\theta$, y a la derecha tenemos que $f_1 = \dot\theta$ porque $\dot\theta$ es un estado o elemento de $x$. Desafortunadamente, no podemos decir que $f_2 = \ddot\theta(t)$ porque $ \ddot\theta$ no es un estado o elemento de $x$. No obstante, tenemos que la segunda fila $f_2$ viene dada por la ecuación (\ref{eq: dyn}), por lo que podemos escribir $f$ como
 \begin{equation}
 	\frac{\mathrm{d}}{\mathrm{dt}}\left(\begin{bmatrix}\theta \\ \dot\theta \end{bmatrix}\right) =  f(x(t), u(t)) = \begin{bmatrix} \dot\theta \\ \frac{1}{ml^2}\left(mgl\sin{\theta}-bl\dot\theta + T\right) \end{bmatrix}. \label{eq: f}
 \end{equation}
 
-El cálculo de $g$ es más sencillo en este caso. Hemos establecido al comienzo que solo podemos medir el ángulo $\theta$. Por lo que $y(t) = \theta(t)$, i.e.,
+El cálculo de $g$ es más sencillo en este caso. Hemos establecido al comienzo que solo podemos medir el ángulo $\theta$, de modo que $y(t) = \theta(t)$, i.e.,
 \begin{equation}
 g(x(t),u(t)) =  \theta(t).
 	\label{eq: g}
@@ -154,8 +154,8 @@ g(x(t),u(t)) =  \theta(t).
 \end{example}
 
 \begin{example}[El oscilador de Van der Pol]
-Se trata de un oscilador, propuesto por primera vez por Balthasar Van der Pol, cuando trabajaba en Philips, para explicar las oscilaciones observadas en tubos de vacío. Podemos obtener la ecuación del oscilador, empleando el circuito de la figura \ref{fig:vdp}.
-\begin{figure}
+Se trata de un oscilador propuesto por primera vez por Balthasar Van der Pol, cuando trabajaba en Philips, para explicar las oscilaciones observadas en tubos de vacío. Podemos obtener la ecuación del oscilador empleando el circuito de la figura \ref{fig:vdp}.\\
+\begin{figure}[h!]
 \centering
 \begin{circuitikz}[american, scale = 0.6]\draw
 (0,-4)to[short]
@@ -172,7 +172,7 @@ Se trata de un oscilador, propuesto por primera vez por Balthasar Van der Pol, c
 \label{fig:vdp}
 \end{figure}
 
-Donde el elemento no lineal NL, presenta una relación entre voltaje e intensidad caracterizada por la función $h(v)$.
+Donde el elemento no lineal NL presenta una relación entre voltaje e intensidad caracterizada por la función $h(v)$.\\
 
 El voltaje $v$ en los tres componentes del circuito debe ser igual; además,
 \begin{align}
@@ -180,7 +180,7 @@ v = L \frac{di_L}{dt}\\
 i_C = C\frac{dv}{dt}\\
 i_N = h(v)
 \end{align}
-Si aplicamos la primera ley de Kirchohff al nodo superior del circuito,
+Si aplicamos la primera ley de Kirchhoff al nodo superior del circuito,
 \begin{align}
 i_C+i_L+i_N = 0\\
 C\frac{dv}{dt}+\frac{1}{L}\int_{-\infty}^{t}v(s)ds +h(v)=0\label{eq:vdp}
@@ -193,9 +193,9 @@ Se trata de un caso particular de la ecuación de Liénard,
 \begin{equation}
 \ddot{v} +f(v)\dot{v}+g(v) = 0
 \end{equation}
-Si definimos ahora, $h(v)$,
+Si definimos ahora $h(v)$,
 \begin{align}
-h(v) = m(\frac{1}{3}v^3-v)\\
+h(v) = m\left(\frac{1}{3}v^3-v\right)\\
 \frac{dh}{dv} = m(v^2-1)
 \end{align}
 y sustituimos en (\ref{eq:vdp2}),
@@ -208,17 +208,16 @@ Podemos representarla finalmente en variables de estado, tomando $x_1=v$ y $x_2=
 \dot{x}_1 &= x_2 \label{eq:vpst1} \\
 \dot{x}_2 &= -\frac{1}{LC}x_1 - m\frac{1}{C}(x_1^2-1)x_2 \label{eq:vdpst2}
 \end{align}
-Podemos ahora hacer un primer análisis cualitativo. El primer término a la derecha del igual en  la ecuación (\ref{eq:vdpst2}) representa una fuerza recuperadora proporcional al desplazamiento, el segundo término, crecerá con la velocidad para $x_1 < 1$, alejando así al sistema del origen  y representará un término disipativo para $x_1 > 1$ acercándolo por tanto de nuevo al origen. Es por tanto esperable, que se alcance
-algún tipo de situación de equilibrio. Más adelante definiremos esta situación rigurosamente como un ciclo límite. \qed
+Podemos ahora hacer un primer análisis cualitativo. El primer término a la derecha del igual en la ecuación (\ref{eq:vdpst2}) representa una fuerza recuperadora proporcional al desplazamiento. El segundo término crecerá con la velocidad para $x_1 < 1$, alejando así al sistema del origen y representará un término disipativo para $x_1 > 1$ acercándolo por tanto de nuevo al origen. Es por tanto esperable, que se alcance algún tipo de situación de equilibrio. Más adelante definiremos esta situación rigurosamente como un ciclo límite. \qed
 \end{example} 
 \begin{example}[Un vehículo de cuatro ruedas.]
-La figura \ref{fig:vehir} muestra un esquema de un vehículo terrestre de cuatro ruedas, visto desde arriba. Si consideramos que se mueve en el plano $x,y$, y que su velocidad instántanea $\vec{V}$ está siempre orientada en la dirección de avance del vehículo $\psi$ --asumimos que no derrapa, ni se mueve lateralmente--, podemos entonces definir la velocidad, en el sistema de referencia $x,y$ como,
+La figura \ref{fig:vehir} muestra un esquema de un vehículo terrestre de cuatro ruedas, visto desde arriba. Si consideramos que se mueve en el plano $x,y$, y que su velocidad instántanea $\vec{V}$ está siempre orientada en la dirección de avance del vehículo $\psi$ --asumimos que no derrapa ni se mueve lateralmente--, podemos entonces definir la velocidad, en el sistema de referencia $x,y$ como
 \begin{align}
-\dot{x} = V_x(t) = V\cos(\psi(t))\\
+\dot{x} = V_x(t) = V\cos(\psi(t)),\\
 \dot{y} = V_y(t) = V\sin(\psi(t)).
 \end{align}
 
-\begin{figure}
+\begin{figure}[hbt!]
 \centering
 
 \begin{tikzpicture}
@@ -243,11 +242,10 @@ La figura \ref{fig:vehir} muestra un esquema de un vehículo terrestre de cuatro
 \label{fig:vehir}
 \end{figure}
 
-Además el vehículo girará, siempre que las ruedas delanteras no estén alineadas con las ruedas traseras, cambiando así su dirección de avance . Podemos relacionar la velocidad de giro del vehículo $\dot{\psi}$ con el ángulo de orientación de las ruedas delanteras $\phi$, y la velocidad a la que avanzan $\vec{v}'$.  podemos obtener las componentes de dicha velocidad en ejes cuerpo (paralela y perpendicular a la dirección de avance del vehículo),
-
+Además el vehículo girará, siempre que las ruedas delanteras no estén alineadas con las ruedas traseras, cambiando así su dirección de avance. Podemos relacionar la velocidad de giro del vehículo $\dot{\psi}$ con el ángulo de orientación de las ruedas delanteras $\phi$, y la velocidad a la que avanzan $\vec{v}'$.  Podemos obtener las componentes de dicha velocidad en ejes cuerpo (paralela y perpendicular a la dirección de avance del vehículo),
 \begin{align}
 v_{P} = v'\cos(\phi(t))\\
-v_{T} = v'\sin(\phi(t))
+v_{T} = v'\sin(\phi(t)).
 \end{align} 
 
 Pero la rueda esta unida al vehículo así que su velocidad en la direccíon de avance debe ser la misma que la del vehículo: $v_P \equiv V$.  A partir de esta relación podemos obtener la velocidad tangencial de las ruedas como,
