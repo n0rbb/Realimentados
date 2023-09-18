@@ -606,7 +606,7 @@ Para el sistema,
 \begin{equation*}
 \dot x = \mu x - x^3,\  x, \mu \in \mathbb{R},  
 \end{equation*}
-Se cumple de nuevo la condición de los ejemplos anteriores para $\mu=0$. Para $\mu>0$, se obtienen tres puntos críticos $x^*=0$ inestable, y $x^*=\pm\sqrt{\mu}$, ambos estables (compruébalo). Para $\mu<0$ solo tenemos un punto crítico $x^*=0$ que resulta ser estable, puesto que los otros corresponden a raíces imaginarias ($x^* = \pm i\sqrt{|\mu|}$). La figura \ref{fig:horquilla} muestra el diagrama de bifurcación para este sistema. La interpretación es similar a la de los dos ejemplos anteriores.
+Se cumple de nuevo la condición de los ejemplos anteriores para $\mu=0$. Para $\mu>0$, se obtienen tres puntos críticos $x^*=0$ inestable, y $x^*=\pm\sqrt{\mu}$, ambos estables (compruébalo). Para $\mu<0$ solo tenemos un punto crítico $x^*=0$ que resulta ser estable, puesto que los otros corresponden a raíces imaginarias ($x^* = \pm j\sqrt{|\mu|}$). La figura \ref{fig:horquilla} muestra el diagrama de bifurcación para este sistema. La interpretación es similar a la de los dos ejemplos anteriores.
 \begin{figure}
 \subfigure[Horquilla \label{fig:horquilla}]{\includegraphics[scale=0.35]{pitchfork2.eps}}
 \subfigure[No existe bifurcación \label{fig:nobif}]{\includegraphics[scale=0.35]{nobif2.eps}}
@@ -653,8 +653,8 @@ El único punto de equilibrio del sistema es $x^*= (0,0)$. Si linealizamos el si
 		1 & \mu
 	\end{bmatrix}
 \end{align*}
-Que tiene autovalores $\mu\pm j$. Estos autovalores son imaginarios puros para $\mu=0$ y cruzan el eje imaginario cuando $\mu$ pasa de negativo a positivo. Para $\mu<0$ el origen es un foco atractivo, para $mu>0$ se convierte en un foco repulsivo.
-Podemos analizarlo más fácilmente si transformamos el sistema a coordenadas polares, $x_1= r\cos(\theta), x_2 = r\sin(\theta)$,
+Que tiene autovalores $\mu\pm j$. Estos autovalores son imaginarios puros para $\mu=0$ y cruzan el eje imaginario cuando $\mu$ pasa de negativo a positivo. Para $\mu<0$ el origen es un foco atractivo, para $\mu>0$ se convierte en un foco repulsivo.
+Podemos analizarlo más fácilmente si transformamos el sistema a coordenadas polares, $x_1= r\cos(\theta)$, $x_2 = r\sin(\theta)$,
 \begin{align*}
 \dot r = \mu r - r^3\\
 \dot \theta = 1
