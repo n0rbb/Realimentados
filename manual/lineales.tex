@@ -4,7 +4,7 @@
 
 En este capítulo nos vamos a centrar en una clase de sistema llamado \emph{sistema linea en el espacio de estados}. Primero, necesitamos la noción de que es un \emph{mapa lineal}.
 
-\begin{definition} Considera un mapeado $H: V \to W$. Si $H$ preserva la operación suma y la multiplicación por un escalar, i.e.,
+\begin{definition} Considera un mapa $H: V \to W$. Si $H$ preserva la operación suma y la multiplicación por un escalar, i.e.,
 \begin{align}
 	H(v_1+v_2) &= H(v_1) + H(v_2), \quad v_1, v_2\in\mathbb{V} \nonumber \\
 	H(\alpha v_1) &= \alpha H(v_1), \quad \alpha\in\mathbb{K} \nonumber,
@@ -29,11 +29,13 @@ El siguiente sistema define un sistema continuo y lineal en el espacio de estado
 
 \begin{equation}
 	\Sigma := \begin{cases}
-	\dot x(t) &= A(t)x(t) + B(t)u(t), \quad x\in\mathbb{R}^n, u\in\mathbb{R}^k \\
-	y(t) &= C(t)x(t) + D(t)u(t), \quad y\in\mathbb{R}^m
+	\dot x(t) &= A(t)x(t) + B(t)u(t), \quad x\in\mathbb{R}^n, A(t) \in \mathbb{R}^{n \times n} u\in\mathbb{R}^k, B(t) \in \mathbb{R}^{n \times k} \\
+	y(t) &= C(t)x(t) + D(t)u(t), \quad y\in\mathbb{R}^m, C(t) \in \mathbb{R}^{m \times n}, D(t) \in \mathbb{R}^{m \times k}
 	\end{cases}
 	\label{eq: linsys}
 \end{equation}
+
+Se llama \emph{sistema LTI} a un sistema lineal y no variante en el tiempo (\emph{Linear Time-Independent}).
 
 \subsection*{Ejercicio}
  Escribe un sistema continuo y lineal en el espacio de estados como un diagrama de bloques entrada/salida y comprueba que es un mapa lineal.
@@ -75,6 +77,7 @@ La solución a una ecuación diferencial ordinaria viene dada por la suma de dos
 \end{equation}
 
 \begin{theorem}{Serie de Peano-Barker.}
+	
 La solución única al sistema homogéneo $\dot x = Ax$ viene dada por
 	\begin{equation}
 		x(t) = \Phi(t,t_0)x(t_0), \quad x(t_0)\in\mathbb{R}^n, t\geq 0,
@@ -84,6 +87,9 @@ donde
 		\Phi(t,t_0) := I + \int_{t_0}^t A(s_1)ds_1 + \int_{t_0}^t A(s_1) \int_{t_0}^{s_1} A(s_2)ds_2ds_1 \nonumber \\ + \int_{t_0}^t A(s_1) \int_{t_0}^{s_1} A(s_2)\int_{t_0}^{s_2} A(s_3) ds_3ds_2ds_1 + \dots . \label{eq: ser}
 	\end{align}
 \end{theorem}
+
+
+
 Esbozo de la prueba: \\
 Primero calculamos la siguiente derivada
 	\begin{align}
@@ -100,6 +106,12 @@ lo cual prueba la identidad $\dot x = A(t)x(t)$ dado que $x(t) = \Phi(t,t_0)x_0$
 
 La matriz $\Phi(t,t_0)$ es llamada \textbf{\emph{matriz de transición de estados}}. Dada una condición inicial $x_0$, podemos predecir $x(t)$ en (\ref{eq: xdyn}) iterando $\Phi(t,t_0)$ en el caso de que no existiera ninguna interacción con el sistema, i.e., $u(t) = 0, t\geq t_0$.
 
+\subsection{Propiedades}
+\begin{enumerate}
+	\item $\Phi(t, s)\Phi(s, \tau) = \Phi(t, \tau)$
+	\item $\Phi(t, s)^{-1} = \Phi(s, t)$
+	\item $\Phi(t, t) = I$
+\end{enumerate}
 \subsection*{Ejercicio}
 Comprobar que
 \begin{align}
@@ -147,7 +159,7 @@ por lo tanto, la solución a la parte homogénea (\ref{eq: xdyn}) teniendo $A$ c
 
 Para continuar, necesitamos el siguiente resultado de álgebra lineal.
 \begin{theorem}
-\textbf{Forma de Jordan}. Para una matriz cuadrada $A\in\mathbb{C}^{n \times n}$, existe un cambio de base no singular $P\in\mathbb{C}^{n \times n}$ que transforma $A$ en
+\textbf{Forma de Jordan}. Para una matriz cuadrada $A\in\mathbb{C}^{n \times n}$, existe un cambio de base no singular (invertible) $P\in\mathbb{C}^{n \times n}$ que transforma $A$ en
 \begin{equation}
 	J = P^{-1}AP = \begin{bmatrix}
 		J_1 & 0 & 0 & \dots & 0 \\
