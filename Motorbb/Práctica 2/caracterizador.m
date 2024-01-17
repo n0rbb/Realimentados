@@ -1,5 +1,6 @@
-close all; clear all;
+close all;
 
+%Importo los datos medidos del motor
 dt1 = importdata("datos/motor01V.mat");
 dt2 = importdata("datos/motor02V.mat");
 dt3 = importdata("datos/motor03V.mat");
@@ -31,11 +32,10 @@ for i = 1:12
     end
     
     %Encontrar los valores no cero de la posición y empezar a contar justo
-    %antes (la menor desviación se obtiene al contar 6 posiciones antes)
+    %antes 
     a = find(m); 
-    %st = [a(1) + 10, a(1) - 8, a(1) - 6, a(1) - 6, a(1) - 6, a(1) - 6,  a(1) - 6, a(1) - 6, a(1) - 6, a(1) - 6 a(1) - 3, a(1) - 3]
-    st = a(1) - 5
-    mprima = m(st:end);
+    st = a(1) - 5;
+    mprima = m(st:2000);
 
     %Hago el fit con los datos recortados y traslado los tiempos para que
     %vayan de 0 a X
@@ -46,7 +46,7 @@ for i = 1:12
     p(i) = (ke(i) * i)/pol(1);
     
     
-    %figure(i)
+   % figure(i)
     %plot(t, m); hold on;
     %plot(t, polyval(pol, t))
 end
@@ -57,7 +57,28 @@ ke
 p0 = mean(p)
 ke0 = mean(ke)
 
+close all;
 
+%GRÁFICAS
 
+open('motorbb_ideal.slx')
+V = [2, 5, 10]
+dts = [dt2, dt5, dt10]
+for i = 1 : length(V)
+    Vref = V(i)
+    s = sim('motorbb_ideal.slx');
+    pm = get(dt(i), "Motor:1").Values.Data;
+    vm = get(dt(i), "Motor:2").Values.Data;
+    t = t(1:length(pm));
+    ts = s.tout;
+    pideal = s.yout{2}.Values.Data;
+    videal = s.yout{1}.Values.Data;
+    figure(i)
+    plot(t, pm); hold on;
+    %plot(t, vm);
+    plot(ts, pideal);
+    plot(ts, videal);
+    legend("Posición del motor", "Posición del modelo", "Velocidad del modelo");
+end
 
 

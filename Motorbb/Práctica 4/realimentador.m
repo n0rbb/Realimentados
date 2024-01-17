@@ -1,5 +1,5 @@
-p = 50.8042;
-ke = 5.6318e3;
+p = 63.7990;
+ke = 6.3065e+03;
 A = [0 1; 0 -p]
 B = [0; ke] %Solo controlo la velocidad
 K = place(A, B, [-0.3 * p, -0.4 * p])

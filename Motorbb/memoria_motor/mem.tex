@@ -20,10 +20,26 @@
 \usepackage{float}
 \usepackage{listings}
 \captionsetup[table]{skip=10pt}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
 
-\lstset{
-    language=Python,
-    literate={á}{{\'a}}1
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz, dsolve},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mylilas},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{if, for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+	literate={á}{{\'a}}1
         {ã}{{\~a}}1
         {é}{{\'e}}1
         {ó}{{\'o}}1
@@ -35,6 +51,8 @@
         {Í}{{\'I}}1
         {Ó}{{\'O}}1
 }
+
+
 
 \setlength{\droptitle}{-15em}
 
@@ -183,19 +201,43 @@ Como se puede apreciar, tanto las señales del modelo como las medidas con el mo
 En primer lugar, se procede a construir un modelo más completo que el modelo de motor ideal elaborado al final de la sección anterior, que incluya también un modelo para simular los encoders y la alimentación con señales de PWM. 
 Para la lectura de los encoders, se reutilizará el bloque de lectura empleado para el manejo en lazo abierto. \\
 
-\textbf{i) Modelo del sistema de alimentación}\\
-
 El sistema de alimentación tratará de simular las señales de PWM (Pulse-Width Modulation) que recibe el motor desde la placa. Entonces, se empieza por construir un bloque que genere una señal con las mismas características.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=4cm]{bloquepwm}
+	\caption{Bloque de generación de señal de PWM}
+\end{figure}
+En el modelo final, este bloque se encontrará enmascarado y recibirá dos parámetros: $T$, que dirigirá el periodo del diente de sierra y, en consecuencia, de la señal PWM (1ms) y $V_{max}$, indicador de la tensión máxima de esta señal (corresponderá con la tensión máxima nominal del motor, 12V).\\ 
 
+El sistema de alimentación incluirá también un bloque en el que se ajuste $V_{ref}$, indicador la tensión continua objetivo del bloque PWM (a menor $V_{ref}$, menor será el ciclo de trabajo de la señal PWM). Como el ciclo de trabajo se establece a través de una comparación de la tensión de la señal de diente de sierra. Para que el bloque PWM funcione correctamente, se ha de pasar una señal de $V_{ref}$ positiva. Si $V_{ref}$ es negativo, se multiplica por -1 la señal de PWM para que el motor avance en sentido contrario.\\
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=5cm]{alimentador}
+	\caption{Sistema de alimentación completo}
+\end{figure}\\
+\newpage
+A continuación se añade el modelo del motor ideal desarrollado previamente y se diseñan sus respectivos encoders para poder leer la posición y la velocidad. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height = 5cm]{encoders}
+	\caption{Modelo de los encoders del motor}
+\end{figure}
+
+Por último, añadiendo el modelo reciclado para el lector de los encoders empleado en el lazo abierto, se obtiene el modelo completo del motor real.  
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height = 3cm]{real_completo}
+	\caption{Modelo completo realista del motor}
+\end{figure}
 
 \newpage
 
 
 
 \section*{Anexo I: Código empleado para las prácticas}
-\subsection*{Cálculo de funciones de transferencia}
-\subsubsection*{ecs.m}
-\begin{lstlisting}[language = MATLAB]
+\subsection*{Cálculo de ecuaciones de velocidad y posición del motor}
+\textbf{ecs.m}
+\begin{lstlisting}[language = Matlab]
 syms ke s p V w(t) theta(t) E(s) thetalap(t)
 %Defino las ecuaciones diferenciales para resolver w (velocidad),
 %theta (posición) y las resuelvo 
@@ -214,6 +256,103 @@ Th = ke /(s * (s + p)) * E(s)
 thetalap(t) = ilaplace(Th)
 
 wlap = diff(thetalap(t), t)
+\end{lstlisting}
+
+\subsection*{Estimación de los parámetros $k_e$ y $p$ del motor}
+\textbf{caracterizador.m}
+\begin{lstlisting}[language = Matlab]
+close all; clear all;
+
+%Importo los datos medidos del motor
+dt1 = importdata("datos/motor01V.mat");
+dt2 = importdata("datos/motor02V.mat");
+dt3 = importdata("datos/motor03V.mat");
+dt4 = importdata("datos/motor04V.mat");
+dt5 = importdata("datos/motor05V.mat");
+dt6 = importdata("datos/motor06V.mat");
+dt7 = importdata("datos/motor07V.mat");
+dt8 = importdata("datos/motor08V.mat");
+dt9 = importdata("datos/motor09V.mat");
+dt10 = importdata("datos/motor10V.mat");
+dt11 = importdata("datos/motor11V.mat");
+dt12 = importdata("datos/motor12V.mat");
+
+%Defino una lista con todos los datasets sobre la que voy a iterar para sacar los datos
+dt = [dt1, dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9, dt10, dt11, dt12];
+p = [];
+ke = [];
+
+for i = 1:12
+    m = get(dt(i), "Motor:1").Values.Data;
+    t = get(dt(i), "Motor:1").Values.Time; 
+    %Para hacer la estimación, voy a empezar a contar justo antes de que los datos de posición cambien de 0. Como los datos a 6 y 10 V marcan 1 desde el principio, resto 1 a la posición para que la búsqueda luego funcione bien. 
+    if i == 6 || i == 10
+        m(2:end) = m(2:end) - 1;
+    end
+    
+    %Encontrar los valores no cero de la posición y empezar a contar justo antes 
+    a = find(m); 
+    st = a(1) - 5
+    mprima = m(st:end);
+
+    %Hago el fit con los datos recortados y traslado los tiempos para que vayan de 0 a X
+    pol = polyfit(t(1:length(mprima)), mprima,  1);
+
+    %Estimo los parámetros para este voltaje y los guardo en una lista
+    ke(i) = -pol(1)^2 / (pol(2) * i);
+    p(i) = (ke(i) * i)/pol(1);
+    
+    
+    %figure(i)
+    %plot(t, m); hold on;
+    %plot(t, polyval(pol, t))
+end
+
+%Imprimo las listas de valores y las medias
+p
+ke
+p0 = mean(p)
+ke0 = mean(ke)
+\end{lstlisting}
+\subsection*{Controlador por realimentación de estados estimados}
+\textbf{realimentador.m}
+\begin{lstlisting}[language = Matlab]
+p = 63.7990;
+ke = 6.3065e+03;
+A = [0 1; 0 -p]
+B = [0; ke] %Solo controlo la velocidad
+K = place(A, B, [-0.3 * p, -0.4 * p])
+
+%u = 1 Vref
+%Diseño del estimador
+C = [1, 0];
+L = acker(A', C', [-1.2*p, -1.2*p])'
+
+Aamp = [A zeros(2, 1); C 0]
+Bamp = [B; 0]
+
+Ki = acker(Aamp, Bamp, [-0.5*p, -0.5*p, -0.7*p])
+\end{lstlisting}
+
+\subsection*{Discretización del controlador para el modelo de motor real}
+\textbf{discretizador.m}
+\begin{lstlisting}[language = Matlab]
+warning("off")
+
+%Crear modelo del sistema del motor
+sys = ss(A, B, C, 0)
+%Discretizar el modelo: c2d(modelo, T) (T = 10^-h s)
+T = 1e-4
+sysd = c2d(sys, T)
+
+%Crear el control discreto
+Kd = acker(sysd.A, sysd.B, [exp(-0.3 * p * T), exp(-0.3 * p * T)])
+Ld = acker(sysd.A', C', [exp(-1.2*p * T), exp(-1.2 * p * T)] )'
+
+DAamp = [sysd.A zeros(2, 1); T * C, 1] 
+DBamp = [sysd.B; 0]
+
+Kid = acker(DAamp, DBamp, [exp(- p * T), exp(-0.5 * p * T), exp(-0.7*p*T)])
 \end{lstlisting}
 \end{document}
 

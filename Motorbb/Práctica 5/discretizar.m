@@ -1,12 +1,12 @@
+warning("off")
+
+%Crear modelo del sistema del motor
 sys = ss(A, B, C, 0)
+%Discretizar el modelo: c2d(modelo, T) (T = 10^-h s)
 T = 1e-4
 sysd = c2d(sys, T)
-%Crear un modelo del motor motormods = ss(A, B, C, D)
-%Discretizar el modelo: motorz = c2d(motors, T) (T = 10^-h s)
-%motorz.A = G
-%motorz.B = H
-%motorz.C = C
 
+%Crear el control discreto
 Kd = acker(sysd.A, sysd.B, [exp(-0.3 * p * T), exp(-0.3 * p * T)])
 Ld = acker(sysd.A', C', [exp(-1.2*p * T), exp(-1.2 * p * T)] )'
 
@@ -15,4 +15,4 @@ DBamp = [sysd.B; 0]
 
 Kid = acker(DAamp, DBamp, [exp(- p * T), exp(-0.5 * p * T), exp(-0.7*p*T)])
 
-
+warning("on")
