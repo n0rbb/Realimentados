@@ -57,7 +57,8 @@ p0 = mean(p)
 ke0 = mean(ke)
 
 
-close all;
+
+
 %GRÁFICAS
 
 open('pykesimulink.slx')
@@ -79,7 +80,9 @@ for i = 1 : length(V)
     plot(tv, vm);
     plot(ts, pideal);
     plot(ts, videal);
-    legend("Posición del motor", "Velocidad del motor", "Posición del modelo", "Velocidad del modelo", "Location", "Northwest");
+    legend("Posición del motor (º)", "Velocidad del motor (º/s)", "Posición del modelo (º)", "Velocidad del modelo (º/s)", "Location", "Northwest");
+    tit = sprintf("Medida a %d V", Vref);
+    title(tit);
 end
 
 
