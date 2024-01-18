@@ -16,20 +16,20 @@ dt12 = importdata("datos/motor12V.mat");
 
 %Defino una lista con todos los datasets sobre la que voy a iterar para
 %sacar los datos
-dt = [dt1, dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9, dt10, dt11, dt12];
+dt = [dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9, dt10, dt11, dt12];
 p = [];
 ke = [];
 w = [];
 
-for i = 1:12
+for i = 1:11
     m = get(dt(i), "Motor:1").Values.Data;
     t = get(dt(i), "Motor:1").Values.Time; 
     %Para hacer la estimación, voy a empezar a contar justo antes de que los datos de posición
     %cambien de 0. Como los datos a 6 y 10 V marcan 1 desde el principio,
     %resto 1 a la posición para que la búsqueda luego funcione bien. 
     if i == 6 || i == 10
-      %  m(2:end) = m(2:end) - 1;
-    %end
+        m(2:end) = m(2:end) - 1;
+    end
     
     %Encontrar los valores no cero de la posición y empezar a contar justo
     %antes 
@@ -42,7 +42,7 @@ for i = 1:12
     pol = polyfit(t(1:length(mprima)), mprima,  1);
    
     %Estimo los parámetros para este voltaje y los guardo en una lista
-    ke(i) = -pol(1)^2 / (pol(2) * i);
+    ke(i) = -pol(1)^2 / (pol(2) * (i + 1));
     p(i) = -pol(1)/pol(2);
     
     figure(i)
@@ -64,14 +64,14 @@ close all;
 %GRÁFICAS
 
 open('pykesimulink.slx')
-V = [1, 5, 9]
-dts = [dt1, dt5, dt9]
+V = [2, 5, 6, 9, 12];
+dts = [dt2, dt5, dt6, dt9, dt12];
 
 for i = 1 : length(V)
-    voltage = V(i)
+    Vref = V(i);
     s = sim('motorbb_ideal.slx');
-    pm = get(dt(i), "Motor:1").Values.Data;
-    vm = get(dt(i), "Motor:2").Values.Data;
+    pm = get(dts(i), "Motor:1").Values.Data;
+    vm = get(dts(i), "Motor:2").Values.Data;
     t = t(1:length(pm));
     ts = s.tout;
     pideal = s.yout{2}.Values.Data;

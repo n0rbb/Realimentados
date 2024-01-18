@@ -27,15 +27,15 @@ for i = 1:11
     %Para hacer la estimación, voy a empezar a contar justo antes de que los datos de posición
     %cambien de 0. Como los datos a 6 y 10 V marcan 1 desde el principio,
     %resto 1 a la posición para que la búsqueda luego funcione bien. 
-    %if i == 6 || i == 10
-    %    m(2:end) = m(2:end) - 1;
-    %end
+    if i == 5 || i == 9
+        m(2:end) = m(2:end) - 1;
+    end
     
     %Encontrar los valores no cero de la posición y empezar a contar justo
     %antes 
     a = find(m); 
-    %st = a(1) - 5
-    mprima = m(401:1200);
+    st = a(1) - 5
+    mprima = m(st:end);
 
     %Hago el fit con los datos recortados y traslado los tiempos para que
     %vayan de 0 a X
@@ -44,10 +44,7 @@ for i = 1:11
     %Estimo los parámetros para este voltaje y los guardo en una lista
     ke(i) = -pol(1)^2 / (pol(2) * (i + 1));
     p(i) = -pol(1)/pol(2);
-    
-    figure(i)
-    plot(t(1:length(mprima)), mprima); hold on;
-    plot(t, polyval(pol, t));
+   
     %figure(i)
     %plot(t, m); hold on;
     %plot(t, polyval(pol, t))
@@ -64,14 +61,14 @@ close all;
 %GRÁFICAS
 
 open('pykesimulink.slx')
-V = [2, 5, 9, 12];
-dts = [dt2, dt5, dt9, 12];
+V = [2, 5, 6, 9, 12];
+dts = [dt2, dt5, dt6, dt9, dt12];
 
 for i = 1 : length(V)
     Vref = V(i);
     s = sim('motorbb_ideal.slx');
-    pm = get(dt(i), "Motor:1").Values.Data;
-    vm = get(dt(i), "Motor:2").Values.Data;
+    pm = get(dts(i), "Motor:1").Values.Data;
+    vm = get(dts(i), "Motor:2").Values.Data;
     t = t(1:length(pm));
     ts = s.tout;
     pideal = s.yout{2}.Values.Data;
@@ -82,7 +79,7 @@ for i = 1 : length(V)
     plot(tv, vm);
     plot(ts, pideal);
     plot(ts, videal);
-    legend("Posición del motor", "Velocidad del motor", "Posición del modelo", "Velocidad del modelo");
+    legend("Posición del motor", "Velocidad del motor", "Posición del modelo", "Velocidad del modelo", "Location", "Northwest");
 end
 
 
