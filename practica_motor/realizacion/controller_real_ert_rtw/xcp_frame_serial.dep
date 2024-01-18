@@ -1,0 +1,34 @@
+xcp_frame_serial.o: \
+ C:/PROGRA~1/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/transport/src/xcp_frame_serial.c \
+ C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/stmnucleo/mbed/NUCLEO_F411RE/mbed_config.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/common/xcp_common.h \
+ C:/Users/miqui/OneDrive/University/4º\ 23-24/Realimentados/practica_motor/realizacion/controller_real_ert_rtw/rtwtypes.h \
+ C:/Program\ Files/MATLAB/R2023b/extern/include/tmwtypes.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/platform/include/xcp_platform.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/stmnucleo/include/xcp_platform_custom.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/target/shared/armcortexmbase/xcp/include/sys_arch.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/include/xcp.h \
+ C:/PROGRA~1/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/transport/src/xcp_frame.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/platform/default/xcp_mem.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/include/xcp_internal.h \
+ C:/PROGRA~1/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/transport/src/xcp_frame_serial.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/src/xcp_cfg.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/platform/default/xcp_drv.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/src/xcp_types.h \
+ C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/src/xcp_cfg.h
+C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/stmnucleo/mbed/NUCLEO_F411RE/mbed_config.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/common/xcp_common.h:
+C:/Users/miqui/OneDrive/University/4º\ 23-24/Realimentados/practica_motor/realizacion/controller_real_ert_rtw/rtwtypes.h:
+C:/Program\ Files/MATLAB/R2023b/extern/include/tmwtypes.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/platform/include/xcp_platform.h:
+C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/stmnucleo/include/xcp_platform_custom.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/target/shared/armcortexmbase/xcp/include/sys_arch.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/include/xcp.h:
+C:/PROGRA~1/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/transport/src/xcp_frame.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/platform/default/xcp_mem.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/include/xcp_internal.h:
+C:/PROGRA~1/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/transport/src/xcp_frame_serial.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/src/xcp_cfg.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/platform/default/xcp_drv.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/src/xcp_types.h:
+C:/Program\ Files/MATLAB/R2023b/toolbox/coder/xcp/src/target/server/protocol/src/xcp_cfg.h:
